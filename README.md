@@ -6,4 +6,4 @@ For running this app:
 
 Run : ``
 npm install
-`` then ``npm start   
+`` then ``npm start``
