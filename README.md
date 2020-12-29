@@ -1,2 +1,4 @@
 # burger-builder
-Demo project for studying React
+For running this app:
+
+``Download
