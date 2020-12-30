@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Auxiliary from "../../hoc/Auxiliary";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
 const INGREDIENT_PRICE = {
 	salad: 0.3,
@@ -14,14 +16,26 @@ const INGREDIENT_PRICE = {
 class BurgerBuilder extends Component {
 	state = {
 		ingredients: {
-			bacon: 0,
-			meat: 0,
 			cheese: 0,
+			meat: 0,
+			bacon: 0,
 			salad: 0,
 		},
 		totalPrice: 4,
+		purchasable: false,
 	};
 
+	updatePurchasableState(ingredients) {
+		const sum = Object.keys(ingredients)
+			.map((igKey) => {
+				return ingredients[igKey];
+			})
+			.reduce((sum, el) => {
+				return sum + el;
+			}, 0);
+
+		this.setState({ purchasable: sum > 0 });
+	}
 	addIngredientHandler = (type) => {
 		const oldValue = this.state.ingredients[type];
 		const updatedValue = oldValue + 1;
@@ -32,12 +46,13 @@ class BurgerBuilder extends Component {
 		oldState.ingredients[type] = updatedValue;
 		oldState.totalPrice = updatedPrice;
 		this.setState(oldState);
+		this.updatePurchasableState(oldState.ingredients);
 	};
 
 	removeIngredientHandler = (type) => {
 		const oldValue = this.state.ingredients[type];
-		if(oldValue <= 0){
-			return
+		if (oldValue <= 0) {
+			return;
 		}
 		const updatedValue = oldValue - 1;
 		const oldPrice = this.state.totalPrice;
@@ -47,14 +62,15 @@ class BurgerBuilder extends Component {
 		oldState.ingredients[type] = updatedValue;
 		oldState.totalPrice = updatedPrice;
 		this.setState(oldState);
+		this.updatePurchasableState(oldState.ingredients);
 	};
 
 	render() {
-		let disabledInfo ={
-			...this.state.ingredients
-		}
+		let disabledInfo = {
+			...this.state.ingredients,
+		};
 
-		for(let key in disabledInfo){
+		for (let key in disabledInfo) {
 			disabledInfo[key] = disabledInfo[key] <= 0;
 		}
 
@@ -63,12 +79,16 @@ class BurgerBuilder extends Component {
 				<div>
 					<Burger ingredients={this.state.ingredients} />
 				</div>
+				<Modal>
+					<OrderSummary ingredients={this.state.ingredients} />
+				</Modal>
 				<BuildControls
 					addIngredient={this.addIngredientHandler}
 					removeIngredient={this.removeIngredientHandler}
 					disabledInfo={disabledInfo}
+					price={this.state.totalPrice}
+					purchasable={this.state.purchasable}
 				/>
-				{this.state.totalPrice}
 				<br></br>
 			</Auxiliary>
 		);
