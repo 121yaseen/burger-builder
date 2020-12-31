@@ -74,7 +74,20 @@ class BurgerBuilder extends Component {
 	};
 	purchaseSuccessHandler = () => {
 		alert("Purchase Success");
-	}
+	};
+	resetHandler = () => {
+		this.setState({
+			ingredients: {
+				cheese: 0,
+				meat: 0,
+				bacon: 0,
+				salad: 0,
+			},
+			totalPrice: 4,
+			purchasable: false,
+			ordering: false,
+		});
+	};
 	render() {
 		let disabledInfo = {
 			...this.state.ingredients,
@@ -94,6 +107,7 @@ class BurgerBuilder extends Component {
 					backDropClicked={this.backDropClickedHandler}
 				>
 					<OrderSummary
+						price={this.state.totalPrice}
 						ingredients={this.state.ingredients}
 						cancel={this.backDropClickedHandler}
 						success={this.purchaseSuccessHandler}
@@ -106,6 +120,7 @@ class BurgerBuilder extends Component {
 					price={this.state.totalPrice}
 					purchasable={this.state.purchasable}
 					ordernow={this.orderNowHandler}
+					reset={this.resetHandler}
 				/>
 				<br></br>
 			</Auxiliary>

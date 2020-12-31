@@ -1,6 +1,6 @@
 import React from "react";
 
-import Button from '../../UI/Button/Button';
+import Button from "../../UI/Button/Button";
 import classes from "./OrderSummary.module.css";
 import Auxiliary from "../../../hoc/Auxiliary";
 
@@ -18,9 +18,16 @@ const orderSummary = (props) => {
 		<Auxiliary>
 			<p>Your delicious burger contains :</p>
 			<ul>{orderIngredients}</ul>
-			<p>Do you want to continue?</p>
-			<Button btnType="Danger" clicked={props.cancel}>Cancel</Button>
-			<Button btnType="Success" clicked={props.success}>Checkout</Button>
+			<p>Continue to Checkout?</p>
+			<p>
+				<strong>Total Price : {props.price.toFixed(2)}</strong>
+			</p>
+			<Button btnType="Danger" clicked={props.cancel}>
+				Cancel
+			</Button>
+			<Button btnType="Success" clicked={props.success}>
+				Checkout
+			</Button>
 		</Auxiliary>
 	);
 };
