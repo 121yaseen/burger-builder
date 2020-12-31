@@ -4,9 +4,9 @@ import classes from "./BuildControls.module.css";
 
 const controls = [
 	{ label: "Cheese", type: "cheese" },
-	{ label: "Salad", type: "salad" },
-	{ label: "Bacon", type: "bacon" },
 	{ label: "Meat", type: "meat" },
+	{ label: "Bacon", type: "bacon" },
+	{ label: "Salad", type: "salad" },
 ];
 const buildControls = (props) => {
 	return (
@@ -29,7 +29,7 @@ const buildControls = (props) => {
 					/>
 				);
 			})}
-			<button className={classes.OrderButton} disabled={!props.purchasable}>
+			<button onClick={props.ordernow} className={classes.OrderButton} disabled={!props.purchasable}>
 				ORDER NOW
 			</button>
 		</div>
