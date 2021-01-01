@@ -1,16 +1,23 @@
-.boxshadowmenu {
-    position: relative;
-    padding-left: 1em;
+.DrawerToggle {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.DrawerToggle div {
+  width: 90%;
+  height: 3px;
+  background-color: white;
+}
+
+@media (min-width: 500px) {
+  .DrawerToggle {
+      display: none;
   }
-  .boxshadowmenu:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.00em;
-    width: 1.45em;
-    height: 0.15em;
-    background: black;
-    box-shadow: 
-      0 0.25em 0 0 black,
-      0 0.5em 0 0 black;
-  }
+}
