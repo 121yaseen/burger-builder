@@ -1,0 +1,16 @@
+.boxshadowmenu {
+    position: relative;
+    padding-left: 1em;
+  }
+  .boxshadowmenu:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.00em;
+    width: 1.45em;
+    height: 0.15em;
+    background: black;
+    box-shadow: 
+      0 0.25em 0 0 black,
+      0 0.5em 0 0 black;
+  }
