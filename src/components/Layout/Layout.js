@@ -2,7 +2,7 @@ import React from "react";
 
 import Auxiliary from "../../hoc/Auxiliary";
 import classes from "./Layout.module.css";
-import Toolbar from '../UI/Navigation/ToolBar/ToolBar';
+import Toolbar from '../Navigation/ToolBar/ToolBar';
 
 const layout = (props) => {
 	return (
