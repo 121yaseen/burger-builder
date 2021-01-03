@@ -1,11 +1,11 @@
-import React, { Component, Componrnt } from "react";
+import React, { Component} from "react";
 import classes from "./Modal.module.css";
 import BackDrop from "../BackDrop/BackDrop";
 import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 
 class Modal extends Component {
 	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.orderNowState !== this.props.orderNowState;
+		return nextProps.orderNowState !== this.props.orderNowState || nextProps.children !== this.props.children;
 	}
 
 	render() {
