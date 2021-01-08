@@ -7,11 +7,58 @@ import Input from "../../../components/UI/Input/Input";
 
 class ContactData extends Component {
   state = {
-    name: "",
-    mail: "",
-    address: {
-      street: "",
-      postalCode: "",
+    orderForm: {
+      name: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Enter your name : ",
+        },
+        value: "",
+      },
+
+      email: {
+        elementType: "input",
+        elementConfig: {
+          type: "email",
+          placeholder: "Enter your E-Mail : ",
+        },
+        value: "",
+      },
+      street: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Enter your Street Name : ",
+        },
+        value: "",
+      },
+      PIN: {
+        elementType: "input",
+        elementConfig: {
+          type: "number",
+          placeholder: "Enter your PIN Code : ",
+        },
+        value: null,
+      },
+      country: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Enter your Country : ",
+        },
+        value: "",
+      },
+      deliveryMethod: {
+        elementType: "select",
+        elementConfig: {
+          options: [
+            { value: "fastest", displayValue: "Fastest" },
+            { value: "cheapest", displayValue: "Cheapest" },
+          ],
+        },
+        value: "",
+      },
     },
     loading: false,
   };
@@ -22,16 +69,6 @@ class ContactData extends Component {
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      customer: {
-        name: "Muhammed Yaseen N A",
-        custID: 121,
-        address: {
-          street: "Njaliyattu South Vazhakulam",
-          PIN: 683105,
-          country: "India",
-        },
-        deliveryMethod: "fastest",
-      },
     };
     axios
       .post("/orders.json", order)
@@ -47,12 +84,7 @@ class ContactData extends Component {
   render() {
     let form = (
       <form>
-        <Input
-          inputtype="input"
-          type="text"
-          name="name"
-          placeholder="Enter your name : "
-        />
+        <Input elementType="..." elementConfig="...." value="..." />
         <Input
           inputtype="input"
           type="email"
