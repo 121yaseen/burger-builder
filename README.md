@@ -5,8 +5,8 @@ For running this app:
 ``
 
 Run : ``
-npm install \n
-`` then ``npm start``
+npm install
+`` \n then ``npm start``
 
 
 
