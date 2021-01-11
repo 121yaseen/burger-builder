@@ -5,7 +5,7 @@ For running this app:
 ``
 
 Run : ``
-npm install
+npm install \n
 `` then ``npm start``
 
 
