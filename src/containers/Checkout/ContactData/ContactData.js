@@ -4,6 +4,7 @@ import axios from "../../../axios-orders";
 import classes from "./ContactData.module.css";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
+import input from "../../../components/UI/Input/Input";
 
 class ContactData extends Component {
   state = {
@@ -36,10 +37,10 @@ class ContactData extends Component {
       PIN: {
         elementType: "input",
         elementConfig: {
-          type: "number",
+          type: "text",
           placeholder: "Enter your PIN Code : ",
         },
-        value: null,
+        value: "",
       },
       country: {
         elementType: "input",
@@ -66,9 +67,14 @@ class ContactData extends Component {
   orderHandler = (event) => {
     event.preventDefault();
     this.setState({ loading: true });
+    const formData = {};
+    for (let formElement in this.state.orderForm) {
+      formData[formElement] = this.state.orderForm[formElement].value;
+    }
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
+      data: formData,
     };
     axios
       .post("/orders.json", order)
@@ -81,31 +87,40 @@ class ContactData extends Component {
       });
   };
 
+  formElementChangedHandler = (event, inputID) => {
+    const updatedOrderForm = { ...this.state.orderForm };
+    const updatedOrderFormElement = { ...updatedOrderForm[inputID] };
+    updatedOrderFormElement.value = event.target.value;
+    updatedOrderForm[inputID] = updatedOrderFormElement;
+    this.setState({ orderForm: updatedOrderForm });
+  };
+
   render() {
+    let formElementsArray = [];
+    for (let key in this.state.orderForm) {
+      formElementsArray.push({
+        id: key,
+        config: this.state.orderForm[key],
+      });
+    }
+    // console.log(formElementsArray[0].config.value);
+    let formElement = formElementsArray.map((formElement) => {
+      return (
+        <Input
+          key={formElement.id}
+          elementType={formElement.config.elementType}
+          elementConfig={formElement.config.elementConfig}
+          value={formElement.config.value}
+          changed={(event) => {
+            this.formElementChangedHandler(event, formElement.id);
+          }}
+        />
+      );
+    });
     let form = (
-      <form>
-        <Input elementType="..." elementConfig="...." value="..." />
-        <Input
-          inputtype="input"
-          type="email"
-          name="mail"
-          placeholder="Enter your Email Address : "
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="street"
-          placeholder="Enter your Street : "
-        />
-        <Input
-          inputtype="input"
-          type="number"
-          name="postalcode"
-          placeholder="Enter your Postal Code : "
-        />
-        <Button btnType="Success" clicked={this.orderHandler}>
-          ORDER
-        </Button>
+      <form onSubmit={this.orderHandler}>
+        {formElement}
+        <Button btnType="Success">ORDER</Button>
       </form>
     );
 

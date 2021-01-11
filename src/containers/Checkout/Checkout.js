@@ -37,6 +37,7 @@ class Checkout extends Component {
       <React.Fragment>
         <CheckoutSummary
           ingredients={this.state.ingredients}
+          price={this.state.totalPrice}
           checkoutCancelled={this.checkoutCancelledHandler}
           checkoutContinued={this.checkoutContinuedHandler}
         />
