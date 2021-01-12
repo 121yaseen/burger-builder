@@ -25,3 +25,8 @@
     outline: none;
     background-color: #ccc;
 }
+
+.Invalid {
+    background-color: red;
+    border-color: rgb(255, 152, 143);
+}
