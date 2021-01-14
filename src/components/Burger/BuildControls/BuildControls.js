@@ -32,7 +32,7 @@ const buildControls = (props) => {
 			<button onClick={props.ordernow} className={classes.OrderButton} disabled={!props.purchasable}>
 				ORDER NOW
 			</button>
-			<button className={classes.OrderButton} onClick={props.reset}>Reset</button>
+			{/* <button className={classes.OrderButton} onClick={props.reset}>Reset</button> */}
 		</div>
 	);
 };
